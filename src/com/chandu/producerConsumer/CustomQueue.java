@@ -20,10 +20,12 @@ public class CustomQueue {
                     queue[currentLength]=num;
                     currentLength++;
                     System.out.println("added "+ num + " to Queue" + Arrays.toString(queue)+" current size is "+ currentLength +" by current Thread "+Thread.currentThread().getName());
-                    queueLock.notify();
+                    queueLock.notify();//proper flow
+                   // queueLock.wait();//deadlock  flow
                 }
                 else {
-                    queueLock.wait();
+                    queueLock.wait();//proper flow
+                    //queueLock.notify();//deadlock flow
                 }
             Thread.sleep(3000);//Just for holding display in console
         }
@@ -36,10 +38,13 @@ public class CustomQueue {
                     queue[currentLength -1]=0;
                     currentLength--;
                     System.out.println("removed "+ num + " from Queue" + Arrays.toString(queue)+" current size is "+ currentLength +" by current Thread "+Thread.currentThread().getName());
-                    queueLock.notify();
+                    queueLock.notify();//proper flow
+                   // queueLock.wait();//deadlock flow
                 }
                 else {
-                    queueLock.wait();
+                    queueLock.wait();//proper flow
+                   // queueLock.notify();//deadlock flow
+
                 }
             Thread.sleep(3000);//Just for holding display in console
         }
